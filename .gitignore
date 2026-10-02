@@ -1,0 +1,5 @@
+/build/
+/compile_commands.json
+/nitro-*.json
+/nitro-*.csv
+__pycache__/

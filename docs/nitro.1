@@ -1,0 +1,69 @@
+.TH NITRO 1 "October 2026" "nitro 0.1.0" "User Commands"
+.SH NAME
+nitro \- interactive RDMA fabric monitor
+.SH SYNOPSIS
+.B nitro
+.RI [ options ]
+.SH DESCRIPTION
+Nitro displays RDMA port throughput, driver counters, queue-pair process owners,
+and ordinary network traffic using Linux netlink, sysfs and procfs.
+The interface requires an 80 by 24 terminal. No RDMA hardware is required for demo mode.
+.SH OPTIONS
+.TP
+.B --demo
+Use explicitly labeled simulated devices and traffic.
+.TP
+.BI "--interval " MS
+Sampling interval in milliseconds, from 100 to 60000. Default: 1000.
+.TP
+.BI "--device " NAMES
+Comma-separated device names or device/port pairs.
+.TP
+.BI "--theme " NAME
+Select midnight, forest or mono.
+.TP
+.B --ascii
+Use ASCII borders and graphs.
+.TP
+.B --no-netlink
+Read sysfs counters without RDMA netlink. Process owners are unavailable.
+.TP
+.B --json
+Write one measured NDJSON sample by default.
+.TP
+.B --headless
+Stream NDJSON until interrupted.
+.TP
+.BI "--count " N
+Stop after N samples. Implies headless mode.
+.TP
+.BI "--duration " SECONDS
+Stop after the given duration. Implies headless mode.
+.TP
+.BI "--record " PATH
+Stream a Perfetto/Chrome JSON trace. Existing files are never overwritten.
+.TP
+.BI "--csv " PATH
+Stream all counter totals and rates to CSV. Implies headless mode.
+.TP
+.B --help
+Display command help.
+.TP
+.B --version
+Display the version.
+.SH KEYS
+1/2 switches views. Arrows or j/k select rows. Tab switches focus.
+Enter inspects counters or process details. / filters. s cycles sort; S reverses.
+Space pauses display. a toggles averaging. g toggles graph scale.
++/- changes interval. t changes theme. r starts/stops recording.
+w opens diagnostics; h opens help. q exits.
+.SH COUNTERS
+Missing and reset counters are unavailable, not zero. IB data counters are
+four-byte words; canonical byte aliases are converted. Process rows indicate
+QP ownership and do not estimate per-process bandwidth.
+.SH EXIT STATUS
+0 on successful completion or clean signal shutdown; 1 on a startup, argument,
+or headless I/O error. Interactive collector errors are shown in diagnostics.
+.SH SEE ALSO
+.BR rdma (8),
+.BR btop (1)

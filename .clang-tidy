@@ -1,0 +1,3 @@
+Checks: '-*,bugprone-*,-bugprone-easily-swappable-parameters,performance-*,portability-*,modernize-use-nullptr,modernize-use-override,cppcoreguidelines-pro-type-member-init'
+WarningsAsErrors: ''
+HeaderFilterRegex: 'include/nitro/.*'
